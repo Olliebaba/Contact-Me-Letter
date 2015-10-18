@@ -1,0 +1,371 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+@import url(https://fonts.googleapis.com/css?family=Rock+Salt);
+
+// global variables
+$white: #ffffff;
+$black: #000000;
+$blob-animation-duration: .5s;
+$blob-color: #861C0E;
+$blob-size: 10vmin;
+$blob-hover-speed: .3s;
+
+// funtions
+@function floatfix($value, $decimals) {
+      @for $i from 1 through $decimals { $value: $value / 10; }
+  @return $value;
+}
+
+@function calc-two-decimals($value) {
+  $new-value: floatfix($value,2);
+  @return $value;
+}
+
+// mixins
+@mixin absolutely() {
+  position: absolute;
+  top:0; right:0; bottom:0; left:0;
+  margin: auto;  
+}
+
+// transforms
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+@mixin transform-origin($transforms) {
+    -moz-transform-origin: $transforms;
+    -o-transform-origin: $transforms;
+    -ms-transform-origin: $transforms;
+    -webkit-transform-origin: $transforms;
+    transform-origin: $transforms;
+}
+
+// filters
+@mixin filter($filters) {
+    -webkit-filter: $filters;
+    filter: $filters;
+}
+
+// animation
+@mixin animation($animations) {
+    -webkit-animation: $animations;
+    animation: $animations;
+}
+@mixin animation-name($animations) {
+    -webkit-animation-name: $animations;
+    animation-name: $animations;
+}
+
+// Buttons' movements
+// outward
+@keyframes stamp-to-button-TL {
+  0%{
+			@include transform(scale(0.8) translate(round(-$blob-size/4),round(-$blob-size/3.5)));
+    }
+  100%{
+        @include transform(scale(1.0) translate(round(-$blob-size * 1.2),round(-$blob-size * 1.2)));
+    }
+}
+@keyframes stamp-to-button-TR {
+  0%{
+        @include transform(scale(0.9) translate(round($blob-size/5),round(-$blob-size/8)));
+    }
+  100%{
+        @include transform(scale(1.0) translate(round($blob-size * 1.2),round(-$blob-size * 1.2)));
+    }
+}
+@keyframes stamp-to-button-BL {
+  0%{
+        @include transform(scale(0.7) translate(round(-$blob-size / 2),round($blob-size / 5)));
+    }
+  100%{
+        @include transform(scale(1.0) translate(round(-$blob-size * 1.2),round($blob-size * 1.2)));
+    }
+}
+@keyframes stamp-to-button-BR {
+  0%{
+        @include transform(scale(0.7) translate(round($blob-size / 3),round($blob-size / 2)));
+  }
+  100%{
+        @include transform(scale(1.0) translate(round($blob-size * 1.2),round($blob-size * 1.2)));
+  }
+}
+// inwards
+@keyframes button-to-stamp-TL {
+    0%{
+        @include transform(scale(1.0) translate(round(-$blob-size * 1.2),round(-$blob-size * 1.2)));
+    }
+    100%{
+        @include transform(scale(0.8) translate(round(-$blob-size/4),round(-$blob-size/3.5)));
+    }
+}
+@keyframes button-to-stamp-TR {
+    0%{
+        @include transform(scale(1.0) translate(round($blob-size * 1.2),round(-$blob-size * 1.2)));
+    }
+    100%{
+        @include transform(scale(0.9) translate(round($blob-size/5),round(-$blob-size/8)));
+    }
+}
+@keyframes button-to-stamp-BL {
+    0%{
+        @include transform(scale(1.0) translate(round(-$blob-size * 1.2),round($blob-size * 1.2)));
+    }
+    100%{
+        @include transform(scale(0.7) translate(round(-$blob-size / 2),round($blob-size / 5)));
+    }
+}
+@keyframes button-to-stamp-BR {
+    0%{
+        @include transform(scale(1.0) translate(round($blob-size * 1.2),round($blob-size * 1.2)));
+    }
+    100%{
+        @include transform(scale(0.7) translate(round($blob-size / 3),round($blob-size / 2)));
+    }
+}
+
+// stamp icon
+// fades
+@keyframes stamp-fades {
+    0% {
+        opacity: 1; 
+        @include transform(scale(1));
+    }
+    99% {
+        opacity: 0; 
+        @include transform(scale(1));
+    }
+    100% {
+        @include transform(scale(0.5));
+    }
+}
+// unfades
+@keyframes stamp-unfades {
+    0% {
+        @include transform(scale(0.5));
+        opacity: 0;
+    }
+    1% {
+        opacity: 0;
+        @include transform(scale(1));
+    }
+    100% {
+        opacity: 1;
+        @include transform(scale(1));
+    }
+}
+* {
+    margin:0;
+    padding:0;
+}
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-size: 14px;
+    line-height: 1.4rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #cdcdcd;
+}
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 8vmin;
+    line-height: 20vmin;
+    padding-top: 10vmin;
+  
+ small {
+  font-size: 4vmin;
+  text-transform: none;
+ }
+ 
+}
+#contact-me {
+    width: 75vmin;
+    height: 50vmin;
+    overflow: hidden;
+    box-shadow: 0 0 1px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.7), 0 0 5px rgba(0,0,0,.5), 0 0 10px rgba(0,0,0,.3);
+    &, & * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    &, &:before, &:after {
+        @include absolutely();
+        background-color: #ffffff;
+        background-image: url('https://graphicalerts.files.wordpress.com/2011/01/paper-texture-2.jpg');
+        background-position: center center; 
+        background-repeat: repeat;
+        border-radius: 3px;
+    }
+ 
+    &:before, &:after {
+     // fixes moz variance with transform-origin
+     // because child element is larger than parent
+     top:-75vmin; right:-75vmin; bottom:-75vmin; left:-75vmin;
+    }
+    
+    &:before {
+        content:"";
+        z-index: 1;
+        display: block;
+        width: 75vmin;
+        height: 75vmin;
+        @include transform(translate( 0vmin, 40.5vmin) rotate(45deg));
+        @include transform-origin(50% 50%);
+        border: 1px solid rgba(70,70,70,.6);
+        box-shadow: 0 0 3px rgba(70,70,70,.2);
+    }
+    &:after {
+        content:"";
+        z-index: 2;
+        display: block;
+        width: 75vmin;
+        height: 75vmin;
+        @include transform(translate( 0vmin, -40.75vmin) rotate(45deg));
+        @include transform-origin(50% 50%);
+        background-color: #ffffff;
+        background-image: url('https://graphicalerts.files.wordpress.com/2011/01/paper-texture-2.jpg');
+        background-position: center center; 
+        background-repeat: repeat;
+        border: 1px solid rgba(70,70,70,.6);
+        box-shadow: 0 0 3px rgba(0,0,0,.5), 0 0 6px rgba(70,70,70,.2);
+        border-radius: 3px;
+    }  
+}
+
+.contact-blobs {
+    @include filter(drop-shadow(0 0 5px #000));
+    z-index: 3;
+    text-align: center;
+    cursor: pointer;
+
+    &, &:before {
+        @include absolutely();
+    }
+  
+    &:before {
+        content:"NB";
+        opacity: 1;
+        width: round($blob-size * 1.6);
+        height: round($blob-size * 1.6);
+        line-height: round($blob-size * 1.6);
+        font-family: 'Rock Salt', cursive;
+        color: rgba(0,0,0,.6);
+        text-shadow: 0px 1px 1px rgba(255,255,255,.2);
+        font-size: 5vmin;
+        z-index: 3;
+        @include transform(scale(1.0));
+        border-radius: 50%;
+        background-color: darken($blob-color,5%);
+        box-shadow: 0 0 3px rgba(0,0,0,.5), 0 0 6px rgba(0,0,0,.3), inset 0 0 1px rgba(0,0,0,.8), inset -1px -1px 3px rgba(255,255,255,.3);
+        @include animation(stamp-unfades ease-out calc-two-decimals(($blob-animation-duration * .6)) 1);
+    }
+}
+
+.contact-blob {
+    @include filter(url('#goo'));
+    @include absolutely();
+    z-index:1;
+    width: round($blob-size * 2);
+    height: round($blob-size * 2);
+    text-align: center;
+    background-color: $blob-color;
+    color: transparent;
+    border-radius: 50%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  
+    a {
+        @include absolutely();
+        display: none;
+        text-decoration: none;
+        width: round($blob-size * 2);
+        line-height: round($blob-size * 2);
+        border-radius: 50%;
+    }
+  
+    @include animation(button-to-stamp-TL ease-out $blob-animation-duration 1);
+    @include transform(scale(0.8) translate(round(-$blob-size/4),round(-$blob-size/3.5)));
+  
+    &:nth-child(2){
+        @include animation-name(button-to-stamp-TR);
+        @include transform(scale(0.9) translate(round($blob-size/5),round(-$blob-size/8)));  
+    }
+    &:nth-child(3){
+        @include animation-name(button-to-stamp-BL);
+        @include transform(scale(0.7) translate(round($blob-size / 3),round($blob-size / 2)));
+    }
+    &:nth-child(4){
+        @include animation-name(button-to-stamp-BR);
+        @include transform(scale(0.7) translate(round(-$blob-size / 2),round($blob-size / 5)));  
+    }
+}
+
+//.contact-blobs {
+.button-show {
+    cursor: default;
+    @include filter(url('#goo') drop-shadow(0 0 2px #000));
+ 
+  &.buttons-shown {
+        @include filter(drop-shadow(0 0 2px #000)); 
+    }
+ 
+    
+ 
+    &:before {
+        @include animation(stamp-fades ease-out calc-two-decimals(($blob-animation-duration * .4)) 1);
+        @include transform(scale(0.5));
+        opacity: 0;
+    }
+  
+    > li {
+        box-shadow: 0 0 10px rgba(0,0,0,0);
+
+        &, & a {
+            transition: calc-two-decimals(($blob-hover-speed * 1.2)) all ease-in;
+        }
+
+        @include animation(stamp-to-button-TL ease-out calc-two-decimals(($blob-animation-duration * .6)) 1);
+        @include transform(scale(1.0) translate(round(-$blob-size * 1.2),round(-$blob-size * 1.2)));
+
+        &:nth-child(2){
+            @include animation-name(stamp-to-button-TR);
+            @include transform(scale(1.0) translate(round($blob-size * 1.2),round(-$blob-size * 1.2)));
+        }
+        &:nth-child(3){
+            @include animation-name(stamp-to-button-BL);
+            @include transform(scale(1.0) translate(round(-$blob-size * 1.2),round($blob-size * 1.2)));
+        }
+        &:nth-child(4){
+            @include animation-name(stamp-to-button-BR);
+            @include transform(scale(1.0) translate(round($blob-size * 1.2),round($blob-size * 1.2)));
+        }
+
+        a {
+            display: block;
+            font-size: 10vmin;
+            color: rgba(0,0,0,.6);
+            text-shadow: 0px 1px 1px rgba(255,255,255,.2);
+            background-color: darken($blob-color,5%);
+            box-shadow: inset 0 0 1px rgba(0,0,0,.8), inset -1px -1px 3px rgba(255,255,255,.3);
+        }
+
+        &:hover {
+            box-shadow: 0 0 10px rgba(0,0,0,.8); 
+            &, & a {
+                transition: $blob-hover-speed all ease-in;
+            }
+            a {
+                color: rgba(255,255,255,.6);
+                text-shadow: 0px 1px 1px rgba(0,0,0,.4);
+                background-color: darken($blob-color,0%);
+            }
+        }
+    }
+}
